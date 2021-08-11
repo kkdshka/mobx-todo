@@ -15,7 +15,7 @@ export interface ITodoStore {
   renameTask: (taskId: string, description: string) => void;
 }
 
-class TodoStore implements ITodoStore {
+export class TodoStore implements ITodoStore {
   tasks: Array<ITask> = loadTasks();
 
   constructor() {
@@ -68,5 +68,3 @@ function loadTasks(): Array<ITask> | [] {
     return JSON.parse(data);
   }
 }
-
-export const todoStore = new TodoStore();

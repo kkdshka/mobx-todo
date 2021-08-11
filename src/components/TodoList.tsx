@@ -1,25 +1,22 @@
 import React from "react";
-import { observer } from "mobx-react";
-import { ITodoStore } from "../stores/todoStore";
+import { useLocalStore, useObserver } from "mobx-react";
+import { ITodoStore, TodoStore } from "../stores/todoStore";
 import { TodoView } from "./TodoView";
 import { Button } from "./common/Button";
 import { Wrapper } from "./common/Wrapper";
 import styled from "styled-components";
 
-type Props = {
-  store: ITodoStore;
-};
-
 const List = styled.li`
   list-style-type: none;
 `;
 
-export const TodoList = observer(({ store }: Props) => {
+export const TodoList = () => {
+  const store: ITodoStore = useLocalStore(() => new TodoStore());
   const onNewTodo = () => {
     store.addTask(prompt("Enter a new task:", "coffee plz") || "");
   };
 
-  return (
+  return useObserver(() => (
     <main>
       <Wrapper color={"floralWhite"}>
         <h1>Tasks</h1>
@@ -37,5 +34,5 @@ export const TodoList = observer(({ store }: Props) => {
         <Button onClick={onNewTodo}>New task</Button>
       </Wrapper>
     </main>
-  );
-});
+  ));
+}
