@@ -10,7 +10,7 @@ type Props = {
   store: ITodoStore;
 };
 
-const List = styled.li`
+const List = styled.ol`
   list-style-type: none;
 `;
 
