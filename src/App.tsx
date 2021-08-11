@@ -1,6 +1,6 @@
 import React from "react";
-import { TodoList } from "./TodoList";
-import { todoStore } from "./todoStore";
+import { TodoList } from "./components/TodoList";
+import { todoStore } from "./stores/todoStore";
 
 function App() {
   return (
