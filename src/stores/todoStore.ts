@@ -1,6 +1,8 @@
 import { action, makeObservable, observable } from "mobx";
 import { nanoid } from "nanoid";
 
+export const TODO_STORE: string = 'store';
+
 export interface ITask {
   id: string;
   description: string;

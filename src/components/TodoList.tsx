@@ -1,20 +1,24 @@
-import React from "react";
-import { observer } from "mobx-react";
-import { ITodoStore } from "../stores/todoStore";
+import React, { FC } from "react";
+import { inject, observer } from "mobx-react";
+import { ITodoStore, TODO_STORE } from "../stores/todoStore";
 import { TodoView } from "./TodoView";
 import { Button } from "./common/Button";
 import { Wrapper } from "./common/Wrapper";
 import styled from "styled-components";
 
 type Props = {
-  store: ITodoStore;
+  store?: ITodoStore;
 };
 
 const List = styled.li`
   list-style-type: none;
 `;
 
-export const TodoList = observer(({ store }: Props) => {
+export const TodoList: FC<Props> = inject(TODO_STORE)(observer(({ store }) => {
+  if (!store) {
+    return (<div/>);
+  }
+
   const onNewTodo = () => {
     store.addTask(prompt("Enter a new task:", "coffee plz") || "");
   };
@@ -38,4 +42,4 @@ export const TodoList = observer(({ store }: Props) => {
       </Wrapper>
     </main>
   );
-});
+}));
